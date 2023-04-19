@@ -3,31 +3,24 @@
 namespace ThreeDGameDev.Actors {
   public class Player : Character {
     [field: SerializeField] private Transform OwnCameraTransform { get; set; }
-    [field: SerializeField] private Animator OwnAnimator { get; set; }
     [field: SerializeField] public float Speed { get; set; }
     [field: SerializeField] public float TurnSpeed { get; set; }
+    [field: SerializeField] public bool IsInvulnerable { get; set; }
     private float HorizontalInput { get; set; }
     private float VerticalInput { get; set; }
 
-
-    private void Start() {
-      OwnAnimator = GetComponent<Animator>();
-      OwnAnimator.Play("Idle");
-    }
 
     private void Update() {
       HorizontalInput = Input.GetAxis("Horizontal");
       VerticalInput = Input.GetAxis("Vertical");
 
       OwnAnimator.SetBool(PlayerState.IsMoving, !HorizontalInput.Equals(0) || !VerticalInput.Equals(0));
-
       OwnAnimator.SetBool(PlayerState.IsRunning, Input.GetKey(KeyCode.LeftShift));
       OwnAnimator.SetBool(PlayerState.IsAttacking, Input.GetMouseButtonDown(0));
       OwnAnimator.SetBool(PlayerState.IsBlocking, Input.GetMouseButton(1));
+      OwnAnimator.SetBool(PlayerState.IsRolling, Input.GetKey(KeyCode.Space));
+      // IsInvulnerable = OwnAnimator.GetCurrentAnimatorStateInfo(0).IsName("Rolling");
 
-      if (OwnAnimator.GetBool(PlayerState.IsBlocking) || OwnAnimator.GetBool(PlayerState.IsAttacking)) {
-        return;
-      }
 
       Vector3 moveDirection = new Vector3(HorizontalInput, 0, VerticalInput);
       float inputMagnitude = Mathf.Clamp01(moveDirection.magnitude) * Speed;
@@ -43,6 +36,10 @@ namespace ThreeDGameDev.Actors {
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, TurnSpeed * Time.deltaTime);
       }
+
+      // if (OwnAnimator.GetBool(PlayerState.IsRolling)) {
+      //   transform.Translate(velocity * (10 * (Speed * Time.deltaTime)), Space.World);
+      // }
 
       transform.Translate(velocity * (Speed * Time.deltaTime), Space.World);
     }

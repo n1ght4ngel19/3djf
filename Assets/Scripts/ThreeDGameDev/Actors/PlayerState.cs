@@ -4,5 +4,6 @@
     public const string IsRunning = "IsRunning";
     public const string IsAttacking = "IsAttacking";
     public const string IsBlocking = "IsBlocking";
+    public const string IsRolling = "IsRolling";
   }
 }
