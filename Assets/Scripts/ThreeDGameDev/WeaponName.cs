@@ -3,5 +3,6 @@
     DoubleShortsword,
     VikingShield,
     Shortsword,
+    BlackSword,
   }
 }

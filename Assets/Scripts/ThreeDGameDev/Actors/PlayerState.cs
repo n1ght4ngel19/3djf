@@ -1,9 +1,9 @@
 ﻿namespace ThreeDGameDev.Actors {
   public class PlayerState {
-    public const string IsMoving = "IsMoving";
-    public const string IsRunning = "IsRunning";
-    public const string IsAttacking = "IsAttacking";
-    public const string IsBlocking = "IsBlocking";
-    public const string IsRolling = "IsRolling";
+    public const string Move = "Move";
+    public const string Run = "Run";
+    public const string Attack = "Attack";
+    public const string Block = "Block";
+    public const string Parry = "Parry";
   }
 }

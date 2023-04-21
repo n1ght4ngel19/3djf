@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace ThreeDGameDev.Actors {
   public class Player : Character {
@@ -8,19 +9,29 @@ namespace ThreeDGameDev.Actors {
     [field: SerializeField] public bool IsInvulnerable { get; set; }
     private float HorizontalInput { get; set; }
     private float VerticalInput { get; set; }
+    private const float WalkSpeed = 1.5f;
+    private const float RunSpeed = 2f;
 
 
     private void Update() {
       HorizontalInput = Input.GetAxis("Horizontal");
       VerticalInput = Input.GetAxis("Vertical");
 
-      OwnAnimator.SetBool(PlayerState.IsMoving, !HorizontalInput.Equals(0) || !VerticalInput.Equals(0));
-      OwnAnimator.SetBool(PlayerState.IsRunning, Input.GetKey(KeyCode.LeftShift));
-      OwnAnimator.SetBool(PlayerState.IsAttacking, Input.GetMouseButtonDown(0));
-      OwnAnimator.SetBool(PlayerState.IsBlocking, Input.GetMouseButton(1));
-      OwnAnimator.SetBool(PlayerState.IsRolling, Input.GetKey(KeyCode.Space));
+      OwnAnimator.SetBool(PlayerState.Move, !HorizontalInput.Equals(0) || !VerticalInput.Equals(0));
+      OwnAnimator.SetBool(PlayerState.Run, Input.GetKey(KeyCode.LeftShift));
+      OwnAnimator.SetBool(PlayerState.Attack, Input.GetMouseButtonDown(0));
+      OwnAnimator.SetBool(PlayerState.Block, Input.GetMouseButton(1));
+      OwnAnimator.SetBool(PlayerState.Parry, Input.GetKey(KeyCode.Space));
+
+      if (Input.GetKeyDown(KeyCode.F)) {
+        LockOn(FindObjectsOfType<Enemy>().First());
+      }
       // IsInvulnerable = OwnAnimator.GetCurrentAnimatorStateInfo(0).IsName("Rolling");
 
+
+      // OwnAnimator.SetBool("Move", !HorizontalInput.Equals(0) || !VerticalInput.Equals(0));
+      // OwnAnimator.SetBool("Run", Input.GetKey(KeyCode.LeftShift));
+      // OwnAnimator.SetBool("Move", !HorizontalInput.Equals(0) || !VerticalInput.Equals(0));
 
       Vector3 moveDirection = new Vector3(HorizontalInput, 0, VerticalInput);
       float inputMagnitude = Mathf.Clamp01(moveDirection.magnitude) * Speed;
@@ -37,11 +48,13 @@ namespace ThreeDGameDev.Actors {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, TurnSpeed * Time.deltaTime);
       }
 
-      // if (OwnAnimator.GetBool(PlayerState.IsRolling)) {
-      //   transform.Translate(velocity * (10 * (Speed * Time.deltaTime)), Space.World);
-      // }
+      Speed = OwnAnimator.GetBool(PlayerState.Run) ? RunSpeed : WalkSpeed;
 
-      transform.Translate(velocity * (Speed * Time.deltaTime), Space.World);
+      if (OwnAnimator.GetBool(PlayerState.Move) && !OwnAnimator.GetBool(PlayerState.Block) &&
+        !OwnAnimator.GetCurrentAnimatorStateInfo(0).IsName(PlayerState.Attack) &&
+        !OwnAnimator.GetBool(PlayerState.Parry)) {
+        transform.Translate(velocity * (Speed * Time.deltaTime), Space.World);
+      }
     }
 
     private void OnApplicationFocus(bool hasFocus) {
@@ -49,5 +62,13 @@ namespace ThreeDGameDev.Actors {
     }
 
     private void Attack(Character character) {}
+
+    public void LockOn(Enemy target) {
+      target.IsLockOnTarget = true;
+
+      foreach (Enemy enemy in FindObjectsOfType<Enemy>().Where(enemy => !enemy.Equals(target))) {
+        enemy.IsLockOnTarget = false;
+      }
+    }
   }
 }
