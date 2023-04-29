@@ -572,8 +572,8 @@ Transform:
   m_GameObject: {fileID: 10681406108305050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.87, y: 1.05, z: 21.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 13711277537785722}
   - {fileID: 13432445221440430}
@@ -593,7 +593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868ba9da439fde94782989543c1b34eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Shot>k__BackingField: {fileID: 0}
 --- !u!114 &13569424129873254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1153,7 +1152,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -25}
+  m_SizeDelta: {x: 0, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8298071024432404433
 CanvasRenderer:
@@ -1230,7 +1229,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2.25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8298071024678260315
 MonoBehaviour:

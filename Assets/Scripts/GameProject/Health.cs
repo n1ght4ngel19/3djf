@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameProject {
@@ -7,7 +8,12 @@ namespace GameProject {
     [field: SerializeField] public float CurrentHealth { get; set; }
     [field: SerializeField] public Slider Healthbar { get; set; }
 
+
     private void Awake() {
+      Healthbar = GetComponentInChildren<Slider>();
+    }
+
+    private void Start() {
       Healthbar.maxValue = MaxHealth;
       CurrentHealth = MaxHealth;
     }

@@ -15,8 +15,10 @@ namespace GameProject {
       Agent = GetComponent<NavMeshAgent>();
     }
 
+    private void Start() {}
+
     private void Update() {
-      if (Vector3.Distance(Target.transform.position, transform.position) < 15f) {
+      if (Target is not null && Vector3.Distance(Target.transform.position, transform.position) < 15f) {
         Agent.SetDestination(Target.transform.position);
       }
     }

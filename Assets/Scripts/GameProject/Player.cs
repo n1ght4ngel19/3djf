@@ -13,13 +13,10 @@ namespace GameProject {
     private const float TurnSpeed = 360f;
 
 
-    protected override void Awake() {
-      base.Awake();
+    private void Start() {
       CameraTransform = Camera.main.transform;
       Speed = WalkSpeed;
     }
-
-    private void Start() {}
 
     private void Update() {
       MoveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));

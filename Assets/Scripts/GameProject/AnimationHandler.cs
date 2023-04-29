@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 namespace GameProject {
@@ -14,6 +13,8 @@ namespace GameProject {
     public bool IsAttacking { get; set; }
     public bool DoAltAttack { get; set; }
     public bool IsAltAttacking { get; set; }
+    public bool DoSummon { get; set; }
+    public bool IsSummoning { get; set; }
     public bool IsInterrupted { get; set; }
     public bool Die { get; set; }
 
@@ -35,8 +36,11 @@ namespace GameProject {
       OwnAnimator.SetBool(CharacterState.Attack, DoAttack);
       DoAltAttack = Input.GetMouseButtonDown(1);
       OwnAnimator.SetBool(CharacterState.AltAttack, DoAltAttack);
+      DoSummon = Input.GetKeyDown(KeyCode.Q);
+      OwnAnimator.SetBool(CharacterState.Summon, DoSummon);
       IsAttacking = OwnAnimator.GetCurrentAnimatorStateInfo(0).IsName(CharacterState.Attack);
       IsAltAttacking = OwnAnimator.GetCurrentAnimatorStateInfo(0).IsName(CharacterState.AltAttack);
+      IsSummoning = OwnAnimator.GetCurrentAnimatorStateInfo(0).IsName(CharacterState.Summon);
       IsInterrupted = OwnAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Interrupt");
     }
 

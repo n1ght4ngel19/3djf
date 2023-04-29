@@ -11,7 +11,7 @@ namespace GameProject {
 
     protected virtual void Awake() {
       Health = GetComponent<Health>();
-      AnimationHandler = GetComponent<AnimationHandler>();
+      AnimationHandler = gameObject.AddComponent<AnimationHandler>();
     }
   }
 }

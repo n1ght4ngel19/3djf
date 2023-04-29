@@ -5,6 +5,7 @@
     public const string Run = "Run";
     public const string Attack = "Attack";
     public const string AltAttack = "AltAttack";
+    public const string Summon = "Summon";
     public const string GetHit = "GetHit";
     public const string Die = "Die";
   }
