@@ -381,6 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7d21180b036bc4ca349a318448b27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsEnemy>k__BackingField: 0
 --- !u!114 &-7502064518259230909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 200
   <CurrentHealth>k__BackingField: 0
+  <Healthbar>k__BackingField: {fileID: 0}
 --- !u!95 &4754822569803728767
 Animator:
   serializedVersion: 5
@@ -459,7 +461,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

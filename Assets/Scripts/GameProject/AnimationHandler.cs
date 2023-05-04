@@ -45,17 +45,21 @@ namespace GameProject {
     }
 
     /// <summary>
-    /// Sets Animator parameters for Npc's.
+    /// Sets Animator parameters for Npcs.
     /// </summary>
     /// <param name="agent">The NavMeshAgent of the Npc.</param>
     public void SetParameters(NavMeshAgent agent) {
       IsMoving = agent.velocity != Vector3.zero;
       OwnAnimator.SetBool(CharacterState.Move, IsMoving);
-      IsRunning = Input.GetKey(KeyCode.LeftShift);
+      // Todo
+      IsRunning = false;
+      // Todo
       OwnAnimator.SetBool(CharacterState.Run, IsRunning);
-      DoAttack = Input.GetMouseButtonDown(0);
+      DoAttack = false;
+      // Todo
       OwnAnimator.SetBool(CharacterState.Attack, DoAttack);
-      DoAltAttack = Input.GetMouseButtonDown(1);
+      // Todo
+      DoAltAttack = false;
       OwnAnimator.SetBool(CharacterState.AltAttack, DoAltAttack);
       IsAttacking = OwnAnimator.GetCurrentAnimatorStateInfo(0).IsName(CharacterState.Attack);
       IsAltAttacking = OwnAnimator.GetCurrentAnimatorStateInfo(0).IsName(CharacterState.AltAttack);

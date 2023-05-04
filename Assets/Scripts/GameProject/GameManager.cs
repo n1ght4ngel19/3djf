@@ -7,6 +7,9 @@ namespace GameProject {
     public static GameManager Instance;
     public Player Player { get; set; }
     public List<Footman> Footmen { get; set; }
+    public List<Beholder> Beholders { get; set; }
+    public List<ChestMonster> ChestMonsters { get; set; }
+    public List<Grunt> Grunts { get; set; }
 
     private void Awake() {
       if (Instance is not null && Instance != this) {
@@ -16,12 +19,14 @@ namespace GameProject {
       }
 
       Instance = this;
-    }
-
-    private void Start() {
       Player = FindObjectOfType<Player>();
       Footmen = FindObjectsOfType<Footman>().ToList();
+      Beholders = FindObjectsOfType<Beholder>().ToList();
+      ChestMonsters = FindObjectsOfType<ChestMonster>().ToList();
+      Grunts = FindObjectsOfType<Grunt>().ToList();
     }
+
+    private void Start() {}
 
     private void OnApplicationFocus(bool hasFocus) {
       Cursor.lockState = hasFocus ? CursorLockMode.Locked : CursorLockMode.None;
